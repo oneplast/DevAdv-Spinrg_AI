@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layouts/base}">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div layout:fragment="contents">
+    <div id="menu-header" class="mt-8">
+        <div class="flex justify-center">
+            <div class="text-2xl font-bold">Spring AI Test Pages</div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 mt-16">
+            <div class="card card-border bg-base-100">
+                <div class="card-body">
+                    <h2 class="card-title">Text Chat</h2>
+
+                    <p>Spring AI의 Chat Client를 이용해서 LLM과 채팅 기능을 구현</p>
+
+                    <div class="card-actions justify-end">
+                        <a th:href="@{/text/chat}">
+                            <button class="btn btn-primary">이동</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

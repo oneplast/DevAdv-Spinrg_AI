@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: Spring_Ai_Prac
+
+  profiles:
+    include: secret
