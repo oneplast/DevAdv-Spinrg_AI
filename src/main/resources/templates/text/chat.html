@@ -2,13 +2,35 @@
 <html lang="en"
       layout:decorate="~{layouts/study}"
 >
+<!-- study의 div 부분만 남기고 모두 대체 -->
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <div class="div" layout:fragment="contents">
-    Hello World!
+    <!-- study가 이 fragment body를 오버라이딩 (클래스 등 모든 정보 오버라이딩) -->
+    <div class="flex flex-col h-full">
+        <div id="chat-container" class="flex-1 overflow-y-auto space-y-4 p-4">
+            <div class="flex justify-start">
+                <div class="max-w-s p-3 rounded-lg text-sm">
+                    안녕하세요! 무엇을 도와드릴까요?
+                </div>
+            </div>
+        </div>
+
+        <div id="input-container" class="my-2 p-1">
+            <form id="chatForm" class="flex space-x-2">
+                <input type="text" id="chatInput" name="q" class="input w-full" placeholder="메세지를 입력해주세요.">
+                <button class="btn btn soft">
+                    전송
+                </button>
+            </form>
+        </div>
+
+
+    </div>
+    <script th:src="@{/js/text_chat.js}"></script>
 </div>
 </body>
 </html>
