@@ -1,0 +1,9 @@
+name: ai-exp
+
+services:
+
+  chroma:
+    image: chromadb/chroma:1.0.15
+    container_name: chroma-db
+    ports:
+      - "18000:8000"
