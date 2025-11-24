@@ -18,9 +18,6 @@ public class AiService {
 
     public ChatResponse generateAnswer(String question) {
 
-        OpenAiChatOptions options = new OpenAiChatOptions();
-        options.setModel("llama-3.1-8b-instant");
-
-        return client.prompt(new Prompt(question, options)).call().chatResponse();
+        return client.prompt(question).call().chatResponse();
     }
 }
