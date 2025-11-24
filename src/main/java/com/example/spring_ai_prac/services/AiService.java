@@ -1,19 +1,16 @@
 package com.example.spring_ai_prac.services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
 @Service
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class AiService {
 
     private final ChatClient client;
-
-    public AiService(ChatClient.Builder chatClientBuilder) {
-        this.client = chatClientBuilder.build();
-    }
 
     public ChatResponse generateAnswer(String question) {
 
