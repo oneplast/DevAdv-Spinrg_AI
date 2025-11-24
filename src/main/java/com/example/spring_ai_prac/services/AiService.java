@@ -22,6 +22,5 @@ public class AiService {
         options.setModel("llama-3.1-8b-instant");
 
         return client.prompt(new Prompt(question, options)).call().chatResponse();
-
     }
 }

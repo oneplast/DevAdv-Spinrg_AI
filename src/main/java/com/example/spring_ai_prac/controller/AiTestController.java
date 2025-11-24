@@ -35,6 +35,7 @@ public class AiTestController {
         String result = chatResponse.getResult().getOutput().getText();
 
         log.info("result = {}", result);
-        return "OK";
+
+        return result;
     }
 }
