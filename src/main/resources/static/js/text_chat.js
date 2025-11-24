@@ -10,7 +10,7 @@ chatForm.addEventListener('submit', async (e) => {
     if (!inputQuestion) return;
 
     const messageDiv = document.createElement('div');
-    messageDiv.classList.add('flex', 'justify-end')
+    messageDiv.classList.add('flex', 'justify-end');
 
     messageDiv.innerHTML = `
                     <div class="max-w-s bg gray-200 p-3 rounded-lg text-sm">${inputQuestion}</div>

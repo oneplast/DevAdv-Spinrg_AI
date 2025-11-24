@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import reactor.core.publisher.Flux;
 
 @Slf4j
 @Controller
@@ -37,5 +38,20 @@ public class AiTestController {
         log.info("result = {}", result);
 
         return result;
+    }
+
+    @GetMapping("/stream/chat")
+    public String showStreamChatPage() {
+
+        return "text/stream";
+    }
+
+    @GetMapping("/stream/chat/answer")
+    @ResponseBody
+    public Flux<String> generateStreamAnswer(
+            @RequestParam("q") String q
+    ) {
+
+        return aiService.generateStreamAnswer(q);
     }
 }
