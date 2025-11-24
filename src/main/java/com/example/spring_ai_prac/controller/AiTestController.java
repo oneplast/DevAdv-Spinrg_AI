@@ -32,7 +32,8 @@ public class AiTestController {
 
         log.info("q = {}", q);
 
-        ChatResponse chatResponse = aiService.generateAnswer(q);
+//        ChatResponse chatResponse = aiService.generateAnswer(q);
+        ChatResponse chatResponse = aiService.generateAnswerWithRoles(q);
         String result = chatResponse.getResult().getOutput().getText();
 
         log.info("result = {}", result);

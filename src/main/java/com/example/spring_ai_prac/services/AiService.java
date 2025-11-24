@@ -21,4 +21,13 @@ public class AiService {
 
         return client.prompt(question).stream().content();
     }
+
+    public ChatResponse generateAnswerWithRoles(String question) {
+
+        return client.prompt(question)
+                .system("You are a helpful assistant that can answer any question. You must answer in Korean")
+                .user(question)
+                .call()
+                .chatResponse();
+    }
 }
