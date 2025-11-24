@@ -36,6 +36,10 @@ dependencies {
     implementation 'org.springframework.ai:spring-ai-starter-model-openai'
 
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
+    implementation 'org.springframework.ai:spring-ai-advisors-vector-store'
+    implementation 'org.springframework.ai:spring-ai-starter-vector-store-chroma'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
