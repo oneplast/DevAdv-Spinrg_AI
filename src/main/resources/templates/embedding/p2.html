@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorate="~{layouts/study}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="contents">
+    <div id="embedding-console-con">
+        <div id="meta-header" class="container mt-6">
+            <span class="text-2xl font-bold mx-6">유사도 측정</span>
+
+            <form id="meta-data-form" class="mt-2 w-full" th:method="post">
+                <fieldset class="fieldset mx-4">
+                    <legend class="fieldset-legend">입력 1</legend>
+                    <input name="d1" type="text" class="input" placeholder="첫 번째 데이터를 입력해주세요!"/>
+                </fieldset>
+
+                <fieldset class="fieldset mx-4">
+                    <legend class="fieldset-legend">입력 2</legend>
+                    <input name="d2" type="text" class="input" placeholder="두 번째 데이터를 입력해주세요!"/>
+                </fieldset>
+
+                <div id="btn-con" class="mt-6 mx-6 flex justify-end">
+                    <button class="btn btn-soft">제출</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="result-container" class="mt-12">
+        <span class="text-2xl font-bold mx-6">결과</span>
+
+        <div class="mt-4 mx-6">
+            <div id="response" th:if="${similarity}">
+                <p class="font-bold text-xl">
+                    [[${similarity}]]
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -3,12 +3,14 @@ package com.example.spring_ai_prac.services;
 import com.example.spring_ai_prac.model.CuisineRecommendationRequest;
 import com.example.spring_ai_prac.model.CuisineRecommendationResponse;
 import com.example.spring_ai_prac.model.FitnessProgramConsultantRequest;
+import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
+import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
@@ -17,6 +19,7 @@ import reactor.core.publisher.Flux;
 public class AiService {
 
     private final ChatClient client;
+    private final EmbeddingModel embeddingModel;
 
     public ChatResponse generateAnswer(String question) {
 
@@ -87,5 +90,36 @@ public class AiService {
         );
 
         return client.prompt(prompt).call().entity(CuisineRecommendationResponse.class);
+    }
+
+    public float[] embed(String text) {
+
+        return embeddingModel.embed(text);
+    }
+
+    public double getSimilarity(String d1, String d2) {
+
+        List<float[]> vectors = embeddingModel.embed(List.of(d1, d2));
+
+        return cosineSimilarity(vectors.get(0), vectors.get(1));
+    }
+
+    private double cosineSimilarity(float[] vectorA, float[] vectorB) {
+
+        if (vectorA.length != vectorB.length) {
+            throw new IllegalArgumentException("Vector dimensions must match");
+        }
+
+        double dotProduct = 0.0; // 내적 (스칼라곱, Scalar product)
+        double magnitudeA = 0.0;
+        double magnitudeB = 0.0;
+
+        for (int i = 0; i < vectorA.length; i++) {
+            dotProduct += vectorA[i] * vectorB[i];
+            magnitudeA += vectorA[i] * vectorA[i];
+            magnitudeB += vectorB[i] * vectorB[i];
+        }
+
+        return dotProduct / (Math.sqrt(magnitudeA) * Math.sqrt(magnitudeB));
     }
 }

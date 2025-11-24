@@ -1,14 +1,7 @@
 spring:
-  application:
-    name: Spring_Ai_Prac
-
   profiles:
     include: secret
+    active: groq-embed
 
-  ai:
-    openai:
-      chat:
-        options:
-          model: llama-3.1-8b-instant
-          temperature: 0.7
-#          max-tokens: 15
+  application:
+    name: Spring_Ai_Prac

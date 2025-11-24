@@ -95,4 +95,41 @@ public class AiTestController {
 
         return "prompt/cuisine";
     }
+
+    @GetMapping("/embedding/v1")
+    public String showEmbeddingV1Page() {
+
+        return "embedding/p1";
+    }
+
+    @PostMapping("/embedding/v1")
+    public String embeddingData(
+            @RequestParam("q") String q,
+            Model model
+    ) {
+
+        float[] embed = aiService.embed(q);
+        model.addAttribute("result", embed);
+
+        return "embedding/p1";
+    }
+
+    @GetMapping("/embedding/v2")
+    public String showEmbeddingV2Page() {
+
+        return "embedding/p2";
+    }
+
+    @PostMapping("/embedding/v2")
+    public String similaritySearch(
+            @RequestParam("d1") String d1,
+            @RequestParam("d2") String d2,
+            Model model
+    ) {
+
+        double similarity = aiService.getSimilarity(d1, d2);
+        model.addAttribute("similarity", similarity);
+
+        return "embedding/p2";
+    }
 }
