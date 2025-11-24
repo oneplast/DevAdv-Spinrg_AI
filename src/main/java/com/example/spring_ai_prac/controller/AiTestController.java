@@ -4,9 +4,11 @@ import com.example.spring_ai_prac.model.CuisineRecommendationRequest;
 import com.example.spring_ai_prac.model.CuisineRecommendationResponse;
 import com.example.spring_ai_prac.model.FitnessProgramConsultantRequest;
 import com.example.spring_ai_prac.services.AiService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.document.Document;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -131,5 +133,23 @@ public class AiTestController {
         model.addAttribute("similarity", similarity);
 
         return "embedding/p2";
+    }
+
+    @GetMapping("/embedding/v3")
+    public String showEmbeddingV3Page() {
+
+        return "embedding/p3";
+    }
+
+    @PostMapping("/embedding/v3")
+    public String findDocsFromVectorStore(
+            @RequestParam("q") String q,
+            Model model
+    ) {
+
+        List<Document> documents = aiService.searchFruits(q);
+        model.addAttribute("results", documents);
+
+        return "embedding/p3";
     }
 }
