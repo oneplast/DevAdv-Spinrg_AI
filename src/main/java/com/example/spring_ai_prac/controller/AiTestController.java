@@ -1,5 +1,7 @@
 package com.example.spring_ai_prac.controller;
 
+import com.example.spring_ai_prac.model.CuisineRecommendationRequest;
+import com.example.spring_ai_prac.model.CuisineRecommendationResponse;
 import com.example.spring_ai_prac.model.FitnessProgramConsultantRequest;
 import com.example.spring_ai_prac.services.AiService;
 import lombok.RequiredArgsConstructor;
@@ -74,5 +76,23 @@ public class AiTestController {
         model.addAttribute("response", response);
 
         return "prompt/fitness";
+    }
+
+    @GetMapping("/prompt/v2")
+    public String showPromptV2Page() {
+
+        return "prompt/cuisine";
+    }
+
+    @PostMapping("/prompt/v2")
+    public String generatePromptAnswer(
+            CuisineRecommendationRequest request,
+            Model model
+    ) {
+
+        CuisineRecommendationResponse response = aiService.generateCuisineList(request);
+        model.addAttribute("response", response);
+
+        return "prompt/cuisine";
     }
 }

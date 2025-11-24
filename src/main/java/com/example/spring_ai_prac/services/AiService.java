@@ -1,5 +1,7 @@
 package com.example.spring_ai_prac.services;
 
+import com.example.spring_ai_prac.model.CuisineRecommendationRequest;
+import com.example.spring_ai_prac.model.CuisineRecommendationResponse;
 import com.example.spring_ai_prac.model.FitnessProgramConsultantRequest;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -64,5 +66,26 @@ public class AiService {
         Prompt prompt = promptTemplate.create(params);
 
         return client.prompt(prompt).call().chatResponse().getResult().getOutput().getText();
+    }
+
+    public CuisineRecommendationResponse generateCuisineList(CuisineRecommendationRequest request) {
+
+        PromptTemplate promptTemplate = new PromptTemplate("""
+                You are an expert in traditional cuisines.
+                Answer the question: What is the traditional cuisine of {country}?
+                Return a list of {amount} in {language} language.
+                
+                You provide information about a specific dish from a specific country.
+                """.trim());
+
+        Prompt prompt = promptTemplate.create(
+                Map.of(
+                        "country", request.country(),
+                        "amount", request.amount(),
+                        "language", request.language()
+                )
+        );
+
+        return client.prompt(prompt).call().entity(CuisineRecommendationResponse.class);
     }
 }
