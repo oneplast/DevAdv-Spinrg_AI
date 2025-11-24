@@ -1,8 +1,12 @@
 package com.example.spring_ai_prac.services;
 
+import com.example.spring_ai_prac.model.FitnessProgramConsultantRequest;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
@@ -29,5 +33,36 @@ public class AiService {
                 .user(question)
                 .call()
                 .chatResponse();
+    }
+
+    public String generateCustomizedFitnessProgram(FitnessProgramConsultantRequest request) {
+
+        PromptTemplate promptTemplate = new PromptTemplate("""
+                너는 맞춤 피트니스 운동을 설계해주는 전문가야.
+                
+                고객의 신체정보를 받아서, 원하는 부위의 운동을 추천해줄거야.
+                
+                다음과 같은 형식으로 대답해.
+                
+                - 대답 형식
+                {targetPart} 운동을 고민하시는군요!
+                
+                {workoutExpMonth}개월 정도의 운동 경력을 갖고 계시고,
+                
+                신장 {height}cm, 체중 {weight}kg 정도라면 다음의 운동을 추천합니다!
+                
+                """
+        );
+
+        Map<String, Object> params = Map.of(
+                "targetPart", request.targetPart(),
+                "height", request.height(),
+                "weight", request.weight(),
+                "workoutExpMonth", request.workoutExpMonth()
+        );
+
+        Prompt prompt = promptTemplate.create(params);
+
+        return client.prompt(prompt).call().chatResponse().getResult().getOutput().getText();
     }
 }

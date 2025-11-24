@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorate="~{layouts/study}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="contents">
+    <div id="prompt-meta-container">
+        <div id="title-container" class="mt-4">
+            <span class="text-2xl font-bold">맞춤 운동 프로그램 프롬프트</span>
+        </div>
+
+        <div id="prompt-form-container">
+            <form class="flex flex-col my-2 mx-2" th:method="post">
+                <div id="profile" class="flex w-full">
+
+                    <fieldset class="fieldset w-full">
+                        <legend class="fieldset-legend">신장</legend>
+                        <input name="height" type="number" class="input" placeholder="신장" required/>
+                        <p class="label">Required</p>
+                    </fieldset>
+
+                    <fieldset class="fieldset w-full">
+                        <legend class="fieldset-legend">체중</legend>
+                        <input name="weight" type="number" class="input" placeholder="체중" required/>
+                        <p class="label">Required</p>
+                    </fieldset>
+
+                </div>
+
+                <div id="details" class="flex w-full">
+
+                    <fieldset class="fieldset w-full">
+                        <legend class="fieldset-legend">운동 경험(개월)</legend>
+                        <input name="workoutExpMonth" type="number" class="input"
+                               placeholder="운동을 얼마나 하셨는지 개월수로 입력해주세요." required/>
+                        <p class="label">Required</p>
+                    </fieldset>
+
+                    <fieldset class="fieldset w-full">
+                        <legend class="fieldset-legend">운동 부위</legend>
+                        <input name="targetPart" type="text" class="input" placeholder="어느 부위를 운동하고 싶은지 입력해주세요."
+                               required/>
+                        <p class="label">Required</p>
+                    </fieldset>
+
+                </div>
+
+                <div id="btn-container" class="mt-4 w-full">
+                    <button class="btn btn-soft">
+                        제출
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="prompt-contents-container" class="mt-8">
+
+        <div id="content-title-container">
+            <span class="text-2xl font-bold">생성된 운동 프로그램</span>
+        </div>
+
+        <div id="contents-container">
+
+            <div class="mt-4" th:if="${response}">
+                [[${response}]]
+            </div>
+            <div class="mt-4" th:unless="${response}">
+                신장, 체중, 운동 경력을 정확히 입력 후 원하는 운동 부위를 입력해주세요!
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

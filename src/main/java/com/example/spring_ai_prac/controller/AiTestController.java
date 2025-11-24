@@ -1,10 +1,12 @@
 package com.example.spring_ai_prac.controller;
 
+import com.example.spring_ai_prac.model.FitnessProgramConsultantRequest;
 import com.example.spring_ai_prac.services.AiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,5 +56,23 @@ public class AiTestController {
     ) {
 
         return aiService.generateStreamAnswer(q);
+    }
+
+    @GetMapping("/prompt/v1")
+    public String showPromptV1Page() {
+
+        return "prompt/fitness";
+    }
+
+    @PostMapping("/prompt/v1")
+    public String generateCustomizedFitnessProgram(
+            FitnessProgramConsultantRequest request,
+            Model model
+    ) {
+
+        String response = aiService.generateCustomizedFitnessProgram(request);
+        model.addAttribute("response", response);
+
+        return "prompt/fitness";
     }
 }
