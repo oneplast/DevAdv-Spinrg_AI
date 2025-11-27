@@ -152,4 +152,22 @@ public class AiTestController {
 
         return "embedding/p3";
     }
+
+    @GetMapping("/rag/v1")
+    public String showRagV1Page() {
+
+        return "rag/p1";
+    }
+
+    @PostMapping("/rag/v1")
+    public String generateKboAnswer(
+            @RequestParam("q") String q,
+            Model model
+    ) {
+
+        String response = aiService.generateRagAnswer(q);
+        model.addAttribute("response", response);
+
+        return "rag/p1";
+    }
 }

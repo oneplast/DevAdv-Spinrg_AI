@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
@@ -116,6 +117,14 @@ public class AiService {
                         .topK(3)
                         .build()
         );
+    }
+
+    public String generateRagAnswer(String q) {
+
+        return client.prompt(q)
+                .advisors(
+                        QuestionAnswerAdvisor.builder(vectorStore).build()
+                ).call().content();
     }
 
     private double cosineSimilarity(float[] vectorA, float[] vectorB) {

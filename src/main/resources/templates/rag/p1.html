@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko"
+      layout:decorate="~{layouts/study}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>RAG 1</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+<div layout:fragment="contents">
+    <div id="rag-console-con">
+
+        <div id="meta-header" class="container mt-6">
+            <span class="text-2xl font-bold mx-6">KBO 야구 규칙 질문 봇</span>
+
+            <form id="meta-data-form" class="mt-2 mx-2 flex flex-col w-full" th:method="post">
+
+                <div id="input-container" class="flex w-full">
+                    <fieldset class="fieldset mx-4 w-full">
+                        <legend class="fieldset-legend">질문</legend>
+                        <input name="q" type="text" class="input w-full" placeholder="질문을 입력해주세요" />
+                    </fieldset>
+                </div>
+
+                <div id="btn-con" class="mt-6 mx-2 flex">
+                    <button class="btn btn-soft">제출</button>
+                </div>
+
+            </form>
+
+        </div>
+
+        <div id="result-container" class="mt-12">
+
+            <span class="text-2xl font-bold mx-6">응답봇</span>
+
+            <div id="response-container" class="mt-4 mx-6">
+                <div class="response" th:if="${response}">
+                    <p class="text-xl">[[ ${response} ]]</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
